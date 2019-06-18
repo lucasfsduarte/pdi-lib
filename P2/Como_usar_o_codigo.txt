@@ -1,0 +1,12 @@
+1. Execute o código "contornos.py" para gerar as imagens com base na imagem base que ele passar
+    1.1 Execute com:
+        Descomente a linha 25 e 36
+        Comente a linha 27 e 38
+    1.2 Execute com:
+        Comente a linha 25 e 36
+        Descomente a linha 27 e 38
+
+2. Execute o "código tratamento.py"
+    Para garantir que nao vai conter erros, limpe os arquivos CSV/dados.csv e CSV/labels.csv
+
+3. Execute "testeContornos.py"
