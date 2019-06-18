@@ -1,43 +1,52 @@
 from general import *
 
+# Lê uma imagem;
 def imgRead(path, grey=0):
     if grey == 1: return cv.imread(path, 0)
     else: return cv.imread(path)
 
 
+# Escreve uma imagem;
 def imgWrite(path, img):
     cv.imwrite(path, img)
 
 
+# Exibe uma imagem;
 def imgShow(img, desc='image'):
     cv.imshow(desc, img)
 
 
+# Separa a imagem em bandas (B, G, R);
 def imgSplit(img):
     return cv.split(img)
 
 
+# Redimensiona a imagem (x, y);
 def imgResize(img, xy):
     return cv.resize(img, xy)
 
 
+# Binariza uma imagem;
 def imgBinaryThresh(img):
     grey = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
     ret, th = cv.threshold(grey, 127, 255, cv.THRESH_BINARY)
     return th
 
 
+# Recorta uma imagem max(x, y) min(x, y);
 def imgCrop(img, max, min):
     # cv.rectangle(img, max, min, (0, 0, 255), 0)
     return img[min[0]:max[0], min[1]:max[1]]
 
 
+# Aplica o threshold Otsu;
 def imgOtsuThresh(img):
     grey = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
     ret, th = cv.threshold(grey, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU)
     return th
 
 
+# Classifica uma cor em termos de semelhança;
 def imgCmpColors(color, colors):
     """
     Módulo responsável por classificar uma cor X em termos de semelhança com
@@ -62,6 +71,8 @@ def imgCmpColors(color, colors):
             bestColor = colors[i]
     return bestColor
 
+
+# Executa o K-Means em uma imagem;
 def imgKmeans(img, k):
     """
         Módulo de execução do algoritmo K-means sobre uma imagem.
@@ -86,6 +97,8 @@ def imgKmeans(img, k):
     # cv.destroyAllWindows()
     return res2, center
 
+
+# Gera o histograma de uma imagem;
 def imgGenHistogram(img, description):
     """
         Módulo responsável por aplicar o algoritmo de Otsu e gerar o histograma.
@@ -109,6 +122,8 @@ def imgGenHistogram(img, description):
     plt.savefig('histogramas/img_%s.png' % description)
     plt.close()
 
+
+# Converte uma imagem em cores;
 def imgConvert(img, conv):
     if conv == 'hsv': return cv.cvtColor(img, cv.COLOR_BGR2HSV)
     elif conv == 'lab': return cv.cvtColor(img, cv.COLOR_BGR2LAB)
@@ -116,9 +131,13 @@ def imgConvert(img, conv):
     elif conv == 'gray': return cv.cvtColor(img, cv.COLOR_BGR2GRAY)
     else: return None
 
+
+# Gera a gaussiana de uma imagem;
 def imgGaussian(img):
     return cv.GaussianBlur(img, (3, 3), 0)
 
+
+# Espera uma interação do teclado;
 def imgWait():
     cv.waitKey(0)
     cv.destroyAllWindows()
